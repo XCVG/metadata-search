@@ -120,6 +120,7 @@
             buttonSearch.TabIndex = 6;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // textBoxSearchChannel
             // 
@@ -269,7 +270,7 @@
             progressBar1.Location = new Point(333, 443);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new Size(162, 23);
-            progressBar1.Style = ProgressBarStyle.Continuous;
+            progressBar1.Style = ProgressBarStyle.Marquee;
             progressBar1.TabIndex = 11;
             progressBar1.Visible = false;
             // 

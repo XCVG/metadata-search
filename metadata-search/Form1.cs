@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace metadata_search
 {
     public partial class Form1 : Form
@@ -60,7 +62,7 @@ namespace metadata_search
                 progressBar1.Enabled = true;
                 buttonStop.Visible = true;
                 buttonStop.Enabled = true;
-                
+
                 SetUIState(false);
                 CancellationTokenSource = new CancellationTokenSource();
                 await task(CancellationTokenSource.Token);
@@ -82,10 +84,34 @@ namespace metadata_search
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            if(CancellationTokenSource != null)
+            if (CancellationTokenSource != null)
             {
                 CancellationTokenSource.Cancel();
             }
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            RunCancellableModal(async (cancellationToken) =>
+            {
+                listBoxResults.DataSource = null;
+
+                SearchInput input = new SearchInput()
+                {
+                    FolderPath = textBoxSource.Text,
+                    Title = textBoxSearchTitle.Text,
+                    Artist = textBoxSearchArtist.Text,
+                    ChannelId = textBoxSearchChannel.Text,
+                    ExcludeSpecialFolders = checkBoxExcludeSpecialFolders.Checked
+                };
+
+                var resultSet = await Task.Run(() => SearchResultSet.SearchFolder(input, cancellationToken));
+                listBoxResults.DataSource = resultSet.GetDisplayableSearchResults();
+                // query these could be column names.
+                listBoxResults.DisplayMember = "FileName";
+                listBoxResults.ValueMember = "FilePath";
+
+            });
         }
     }
 }
