@@ -6,7 +6,7 @@ namespace metadata_search
     public partial class Form1 : Form
     {
         private CancellationTokenSource? CancellationTokenSource;
-        private SearchResultSet CurrentResults;
+        private SearchResultSet? CurrentResults;
 
         public Form1()
         {
@@ -102,13 +102,18 @@ namespace metadata_search
                 listBoxResults.DataSource = null;
                 CurrentResults = null;
 
+                string? excludeFolder = null;
+                if(checkBoxExcludeSpecialFolders.Checked)
+                    excludeFolder = textBoxDestination.Text;
+
                 SearchInput input = new SearchInput()
                 {
                     FolderPath = textBoxSource.Text,
                     Title = textBoxSearchTitle.Text,
                     Artist = textBoxSearchArtist.Text,
                     ChannelId = textBoxSearchChannel.Text,
-                    ExcludeSpecialFolders = checkBoxExcludeSpecialFolders.Checked
+                    ExcludeSpecialFolders = checkBoxExcludeSpecialFolders.Checked,
+                    ExcludePath = excludeFolder
                 };
 
                 var resultSet = await Task.Run(() => SearchResultSet.SearchFolder(input, cancellationToken));

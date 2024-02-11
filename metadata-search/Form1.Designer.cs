@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBoxSource = new GroupBox();
+            checkBoxExcludeDestination = new CheckBox();
             checkBoxExcludeSpecialFolders = new CheckBox();
             buttonPickSource = new Button();
             textBoxSource = new TextBox();
@@ -57,6 +58,7 @@
             // 
             // groupBoxSource
             // 
+            groupBoxSource.Controls.Add(checkBoxExcludeDestination);
             groupBoxSource.Controls.Add(checkBoxExcludeSpecialFolders);
             groupBoxSource.Controls.Add(buttonPickSource);
             groupBoxSource.Controls.Add(textBoxSource);
@@ -66,6 +68,18 @@
             groupBoxSource.TabIndex = 0;
             groupBoxSource.TabStop = false;
             groupBoxSource.Text = "Source";
+            // 
+            // checkBoxExcludeDestination
+            // 
+            checkBoxExcludeDestination.AutoSize = true;
+            checkBoxExcludeDestination.Checked = true;
+            checkBoxExcludeDestination.CheckState = CheckState.Checked;
+            checkBoxExcludeDestination.Location = new Point(174, 51);
+            checkBoxExcludeDestination.Name = "checkBoxExcludeDestination";
+            checkBoxExcludeDestination.Size = new Size(129, 19);
+            checkBoxExcludeDestination.TabIndex = 3;
+            checkBoxExcludeDestination.Text = "Exclude destination";
+            checkBoxExcludeDestination.UseVisualStyleBackColor = true;
             // 
             // checkBoxExcludeSpecialFolders
             // 
@@ -332,5 +346,6 @@
         private Button buttonPickDestination;
         private Button buttonStop;
         private ProgressBar progressBar1;
+        private CheckBox checkBoxExcludeDestination;
     }
 }

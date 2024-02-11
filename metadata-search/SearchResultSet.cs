@@ -22,7 +22,7 @@ namespace metadata_search
             //for testing sequence/cancellation
             
             List<string> foldersToCheck = new List<string>();
-            GetFoldersRecurse(input.FolderPath, input.ExcludeSpecialFolders, foldersToCheck);
+            GetFoldersRecurse(input.FolderPath, input.ExcludeSpecialFolders, input.ExcludePath, foldersToCheck);
 
             Dictionary<string, SearchResult> results = new Dictionary<string, SearchResult>();
 
@@ -186,15 +186,18 @@ namespace metadata_search
             return null;
         }
 
-        private static void GetFoldersRecurse(string folderPath, bool excludeSpecial, List<string> foldersToCheck)
+        private static void GetFoldersRecurse(string folderPath, bool excludeSpecial, string excludePath, List<string> foldersToCheck)
         {
+            if (!string.IsNullOrEmpty(excludePath) && folderPath == excludePath)
+                return;
+
             foreach(var directory in Directory.EnumerateDirectories(folderPath))
             {
                 string folderName = Path.GetFileName(directory);
                 if (excludeSpecial && folderName.StartsWith("!_"))
                     continue;
 
-                GetFoldersRecurse(directory, excludeSpecial, foldersToCheck);
+                GetFoldersRecurse(directory, excludeSpecial, excludePath, foldersToCheck);
             }
 
             //base case

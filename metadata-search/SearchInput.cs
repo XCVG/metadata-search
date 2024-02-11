@@ -10,6 +10,7 @@ namespace metadata_search
     {
         public string FolderPath { get; init; }
         public bool ExcludeSpecialFolders { get; init; }
+        public string? ExcludePath { get; init; }
 
         public string? Title { get; init; }
         public string? Artist { get; init; }
