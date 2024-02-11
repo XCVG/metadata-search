@@ -176,8 +176,10 @@
             listBoxResults.ItemHeight = 15;
             listBoxResults.Location = new Point(12, 259);
             listBoxResults.Name = "listBoxResults";
+            listBoxResults.SelectionMode = SelectionMode.MultiExtended;
             listBoxResults.Size = new Size(443, 394);
             listBoxResults.TabIndex = 2;
+            listBoxResults.SelectedIndexChanged += listBoxResults_SelectedIndexChanged;
             // 
             // labelInspectorTitle
             // 
@@ -207,6 +209,7 @@
             buttonOpenSelected.TabIndex = 5;
             buttonOpenSelected.Text = "Open Selected";
             buttonOpenSelected.UseVisualStyleBackColor = true;
+            buttonOpenSelected.Click += buttonOpenSelected_Click;
             // 
             // buttonMoveSelected
             // 
@@ -216,6 +219,7 @@
             buttonMoveSelected.TabIndex = 6;
             buttonMoveSelected.Text = "Move Selected";
             buttonMoveSelected.UseVisualStyleBackColor = true;
+            buttonMoveSelected.Click += buttonMoveSelected_Click;
             // 
             // buttonMoveAll
             // 
@@ -225,6 +229,7 @@
             buttonMoveAll.TabIndex = 7;
             buttonMoveAll.Text = "Move All";
             buttonMoveAll.UseVisualStyleBackColor = true;
+            buttonMoveAll.Click += buttonMoveAll_Click;
             // 
             // labelDestination
             // 
